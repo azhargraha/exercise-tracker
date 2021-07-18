@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 const CreateExercise = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     return (
-        <div className="content-container">
+        <form className="content-container">
             <div className="heading">
                 <h3>Create new exercise log</h3>
                 <p>An exercise log keeps track of what you do, allowing you to see patterns in case you are not meeting your exercise requirements. If you notice you always skip your Friday routine. Best of all, your log lets you see your progress and accomplishments.</p>
@@ -15,8 +15,8 @@ const CreateExercise = () => {
             <div className="form-wrapper">
                 <div className="forms">
                     <h4>Name</h4>
-                    <select className="dropdown" name="user name" id="">
-                        <option value="placeholder" selected hidden disabled>Select user name</option>
+                    <select className="dropdown" name="user name" id="" required>
+                        <option value="" selected hidden disabled>Select user name</option>
                         <option value="tatang">Tatang</option>
                         <option value="asep">Asep</option>
                     </select>
@@ -24,12 +24,12 @@ const CreateExercise = () => {
                 </div>
                 <div className="forms">
                     <h4>Description</h4>
-                    <input className="textInput" spellCheck="false" autoComplete="off" type="text" placeholder="Enter exercise description" name="Description" id="" />
+                    <input className="textInput" spellCheck="false" autoComplete="off" type="text" placeholder="Enter exercise description" name="Description" id="" required/>
                 </div>
                 <div className="short-forms">
                     <div className="forms" id="duration">
                         <h4>Duration</h4>
-                        <input className="textInput" spellCheck="false" autoComplete="off" type="text" placeholder="Enter duration" name="Duration" id="" />
+                        <input className="textInput" spellCheck="false" autoComplete="off" type="number" placeholder="Enter duration" name="Duration" id="" required/>
                     </div>
                     <div className="forms" id="date">
                         <h4>Date</h4>
@@ -40,12 +40,13 @@ const CreateExercise = () => {
                         placeholderText="Pick a date"
                         onChange={date => setSelectedDate(date)}
                         maxDate={new Date()}
+                        required
                         />
                     </div>
                 </div>
             </div>
-            <button className="submit-button">Submit</button>
-        </div>
+            <button className="submit-button" type="submit">Submit</button>
+        </form>
     )
 };
 

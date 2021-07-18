@@ -95,8 +95,8 @@ ul {
         margin-bottom: .5em;
     }
     p {
-        font-size: .8em;
-        font-weight: 500;
+        font-size: .9em;
+        font-weight: 400;
         color: $secondary-1;
     }
     .submit-button {
@@ -145,6 +145,11 @@ ul {
             &::-webkit-input-placeholder {
                 color: $secondary-2;
                 font-weight: 400;
+            }
+            &[type=number],
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                appearance: none;
             }
         }
         select {
