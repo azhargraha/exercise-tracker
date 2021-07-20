@@ -1,11 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
+import axios from 'axios';
 
 import './Components.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const CreateExercise = () => {
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [users, setUsers] = useState([]);
+    const initialLog = {
+        username: 'default',
+        description: '',
+        duration: '',
+        date: new Date()
+    };
+    const [logData, setLogData] = useState(initialLog);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/users/')
+            .then(res => setUsers(res.data))
+    }, []);
+
+    const titleCase = (text) => {
+        return text.replace(
+            /\w\S*/g,
+            function(str) {
+                return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
+            }
+        );
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:5000/exercises/add', logData)
+            .then(res => console.log(res.data))
+        setLogData(initialLog);
+    }
+
+    const onChangeSelect = (e) => {
+        setLogData({
+            ...logData,
+            username: e.target.value
+        });
+    }
+
+    const onChangeDesc = (e) => {
+        setLogData({
+            ...logData,
+            description: e.target.value
+        });
+    }
+
+    const onChangeDuration = (e) => {
+        setLogData({
+            ...logData,
+            duration: e.target.value
+        });
+    }
+    
+    const onChangeDate = (e) => {
+        setLogData({
+            ...logData,
+            date: e
+        });
+    }
+
     return (
         <form className="content-container">
             <div className="heading">
@@ -15,37 +73,37 @@ const CreateExercise = () => {
             <div className="form-wrapper">
                 <div className="forms">
                     <h4>Name</h4>
-                    <select className="dropdown" name="user name" id="" required>
-                        <option value="" selected hidden disabled>Select user name</option>
-                        <option value="tatang">Tatang</option>
-                        <option value="asep">Asep</option>
+                    <select onChange={onChangeSelect} value={logData.username} className="dropdown" name="user name" id="" required>
+                        <option value="default" hidden disabled>Select user name</option>
+                        {users.map(user => {return <option key={user._id} value={user.username}>{user.username}</option>})}
                     </select>
                     <div className="dropicon"></div>
                 </div>
                 <div className="forms">
                     <h4>Description</h4>
-                    <input className="textInput" spellCheck="false" autoComplete="off" type="text" placeholder="Enter exercise description" name="Description" id="" required/>
+                    <input onChange={onChangeDesc} value={logData.description} className="textInput" spellCheck="false" autoComplete="off" type="text" placeholder="Enter exercise description" name="Description" id="" required/>
                 </div>
                 <div className="short-forms">
                     <div className="forms" id="duration">
                         <h4>Duration</h4>
-                        <input className="textInput" spellCheck="false" autoComplete="off" type="number" placeholder="Enter duration" name="Duration" id="" required/>
+                        <input onChange={onChangeDuration} value={logData.duration} className="textInput" spellCheck="false" autoComplete="off" type="number" placeholder="Enter duration" name="Duration" id="" required/>
                     </div>
                     <div className="forms" id="date">
                         <h4>Date</h4>
                         <DatePicker
+                        onChange={onChangeDate}
                         onChangeRaw={e => e.preventDefault()}
                         className="DatePicker" 
-                        selected={selectedDate}
+                        selected={logData.date}
                         placeholderText="Pick a date"
-                        onChange={date => setSelectedDate(date)}
+                        onChange={onChangeDate}
                         maxDate={new Date()}
                         required
                         />
                     </div>
                 </div>
             </div>
-            <button className="submit-button" type="submit">Submit</button>
+            <button onClick={onSubmit} className="submit-button" type="submit">Submit</button>
         </form>
     )
 };
