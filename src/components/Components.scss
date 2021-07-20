@@ -76,7 +76,7 @@ ul {
                 background-color: white;
                 transition: 
                     width 430ms ease-in-out,
-                    background-color 430ms ease-in-out;
+                    background-color 430ms ease-out;
             }
             &.active {
                 color: $lime;
@@ -91,7 +91,7 @@ ul {
                     transition: width 430ms ease-in-out;
                     transition: 
                         width 430ms ease-in-out,
-                        background-color 430ms ease-in-out;
+                        background-color 430ms ease-out;
                 }
             }
         }

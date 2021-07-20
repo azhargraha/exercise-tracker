@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Components.scss';
 
 const Navbar = () => {
     const [active, setActive] = useState(0);
+    
+    useEffect(() => {
+        const activeMenu = sessionStorage.getItem('activeMenu');
+        setActive(JSON.parse(activeMenu));
+        console.log(parseInt(activeMenu));
+    }, []);
+
     const menusOnclick = (i) => {
         setActive(i);
+        sessionStorage.setItem('activeMenu', JSON.stringify(i));
     };
 
     return (
