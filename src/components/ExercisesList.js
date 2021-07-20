@@ -26,7 +26,7 @@ const ExercisesList = () => {
     const onDelete = (id) => {
         axios.delete(`http://localhost:5000/exercises/${id}`)
             .then(res => console.log(res.data))
-        setListData(listData.filter(data => data._id !== id));
+            .then(res => setListData(listData.filter(data => data._id !== id)))
     };
 
     return (

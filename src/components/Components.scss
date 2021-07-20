@@ -73,7 +73,26 @@ ul {
                 left: 0;
                 height: .1em;
                 width: 0;
-                background-color: $lime;
+                background-color: white;
+                transition: 
+                    width 430ms ease-in-out,
+                    background-color 430ms ease-in-out;
+            }
+            &.active {
+                color: $lime;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: .1em;
+                    left: 0;
+                    height: .1em;
+                    width: 100%;
+                    background-color: $lime;
+                    transition: width 430ms ease-in-out;
+                    transition: 
+                        width 430ms ease-in-out,
+                        background-color 430ms ease-in-out;
+                }
             }
         }
         li {
@@ -81,19 +100,6 @@ ul {
             &:hover a {
                 color: $lime;
                 transition: color 230ms ease-out;
-            }
-        }
-        a.active {
-            color: $lime;
-            &:after {
-                content: '';
-                position: absolute;
-                bottom: .1em;
-                left: 0;
-                height: .1em;
-                width: 100%;
-                background-color: $lime;
-                transition: 430ms ease-in-out;
             }
         }
     }
