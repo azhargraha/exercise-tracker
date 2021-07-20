@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import './Components.scss';
 
 const Navbar = () => {
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(null);
     
     useEffect(() => {
         const activeMenu = sessionStorage.getItem('activeMenu');
         setActive(JSON.parse(activeMenu));
-        console.log(parseInt(activeMenu));
     }, []);
 
     const menusOnclick = (i) => {
@@ -27,7 +26,7 @@ const Navbar = () => {
                 <li>
                     <Link onClick={ e => menusOnclick(0)} 
                     to="/" 
-                    className={active === 0 ? "active" : null}>
+                    className={active === 0 | active === null ? "active" : null}>
                         Exercise Lists
                     </Link>
                 </li>
