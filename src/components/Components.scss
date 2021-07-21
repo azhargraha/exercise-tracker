@@ -39,75 +39,105 @@ ul {
     list-style-type: none;
 }
 
-.navbar-container {
-    height: 100%;
-    width: 35%;
-    background-color: $black-primary;
-    padding: $container-padding;
+.navbar {
+    flex: .3;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .logo {
+    .secondary-bg {
         position: absolute;
-        top: 3rem;
-        left: 3rem;
-        color: white;
-        line-height: 200%;
-        font-family: 'BebasNeue-Regular';
-        font-size: .7em;
-        letter-spacing: .15em;
+        transform: skew(0);
+        width: 100%;
+        height: 100%;
+        background-color: $lime;
     }
-    .navMenus-container {
-        font-size: 1.7em;
-        font-weight: 600;
-        a {
-            line-height: 1.8em;
+    .navbar-container {
+        transform: skew(0);
+        height: 100%;
+        width: 100%;
+        background-color: $black-primary;
+        // padding: $container-padding;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .logo {
+            position: absolute;
+            top: 3rem;
+            left: 3rem;
             color: white;
-            position: relative;
-            transition: color 150ms ease-out;
-            &:after {
-                content: '';
-                position: absolute;
-                bottom: .1em;
-                left: 0;
-                height: 3px;
-                width: 0;
-                background-color: white;
-                transition: 
-                    width 430ms ease-in-out,
-                    background-color 430ms ease-out;
-            }
-            &.active {
-                color: $lime;
+            line-height: 200%;
+            font-family: 'BebasNeue-Regular';
+            font-size: .7em;
+            letter-spacing: .15em;
+        }
+        .navMenus-container {
+            position: absolute;
+            font-size: 1.7em;
+            font-weight: 600;
+            // top: 50%;
+            // left: 50%;
+            // transform: translate(-50%, -50%);
+            a {
+                white-space: nowrap;
+                line-height: 1.8em;
+                color: white;
+                position: relative;
+                transition: color 150ms ease-out;
                 &:after {
                     content: '';
+                    opacity: 0;
                     position: absolute;
                     bottom: .1em;
                     left: 0;
                     height: 3px;
-                    width: 100%;
-                    background-color: $lime;
-                    transition: width 430ms ease-in-out;
+                    width: 0;
+                    background-color: white;
                     transition: 
                         width 430ms ease-in-out,
                         background-color 430ms ease-out;
+                    animation: fade-in linear forwards;
+                    animation-delay: 500ms;
+                }
+                &.active {
+                    color: $lime;
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        bottom: .1em;
+                        left: 0;
+                        height: 3px;
+                        width: 100%;
+                        background-color: $lime;
+                        transition: width 430ms ease-in-out;
+                        transition: 
+                            width 430ms ease-in-out,
+                            background-color 430ms ease-out;
+                    }
                 }
             }
-        }
-        li {
-            color: $lime;
-            &:hover a {
+            li {
                 color: $lime;
-                transition: color 230ms ease-out;
+                &:hover a {
+                    color: $lime;
+                    transition: color 230ms ease-out;
+                }
             }
         }
     }
 }
 
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .content-container {
+    flex: .7;
     height: 100%;
-    width: 65%;
+    // width: 70%;
     padding: $container-padding;
     display: flex;
     justify-content: space-between;
@@ -139,6 +169,7 @@ ul {
     .list-container {
         flex: 1;
         overflow-y: auto;
+        overflow-x: hidden;
         .upper-line {
             margin-bottom: .1em;
             h3 {

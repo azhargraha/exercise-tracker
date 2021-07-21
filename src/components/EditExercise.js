@@ -37,9 +37,7 @@ const EditExercise = (props) => {
     const onUpdate = (e) => {
         e.preventDefault();
         axios.post(`http://localhost:5000/exercises/update/${id}`, logData)
-            .then(res => console.log('1'))
-            .then(res => {history.push('/'); console.log('2')})
-            .then(res => console.log('3'))
+            .then(res => history.push('/'))
     }
 
     const onChangeSelect = (e) => {
