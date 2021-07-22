@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
+import gsap from 'gsap';
 
 import './Components.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const EditExercise = (props) => {
+    const heading = useRef();
+    const forms = useRef();
     const { id } = useParams();
     const history = useHistory();
     const [users, setUsers] = useState([]);
@@ -16,6 +19,23 @@ const EditExercise = (props) => {
         duration: '',
         date: new Date()
     });
+    const fadeInUp = {
+        y: 10,
+        opacity: 0,
+        ease: 'Power3.easeOut',
+        delay: .3,
+        stagger: {
+            each: .2
+        }
+    }
+
+    useEffect(() => {
+        gsap.from(heading.current.childNodes, fadeInUp);
+        gsap.from(forms.current.childNodes, {
+            ...fadeInUp,
+            delay: .6
+        });
+    }, []);
 
     useEffect(() => {
         axios.get(`http://localhost:5000/exercises/${id}`)
@@ -70,11 +90,11 @@ const EditExercise = (props) => {
 
     return (
         <form className="content-container">
-            <div className="heading">
+            <div className="heading" ref={heading}>
                 <h3>Create new exercise log</h3>
                 <p>An exercise log keeps track of what you do, allowing you to see patterns in case you are not meeting your exercise requirements. If you notice you always skip your Friday routine. Best of all, your log lets you see your progress and accomplishments.</p>
             </div>
-            <div className="form-wrapper">
+            <div className="form-wrapper" ref={forms}>
                 <div className="forms">
                     <h4>Name</h4>
                     <select onChange={onChangeSelect} value={logData.username} className="dropdown" name="user name" id="" required>

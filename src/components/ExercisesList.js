@@ -50,7 +50,7 @@ const ExercisesList = () => {
             .catch(err => {
                 setdataExist(false);
                 if (axios.isCancel(err)) {
-                    console.log(err.message, "error bos")
+                    console.log(err)
                 }
             })
         return () => {
@@ -74,7 +74,7 @@ const ExercisesList = () => {
 
     return (
         <div className="content-container">
-            <div className="heading" ref={heading}>
+            <div className="heading heading-extra" ref={heading}>
                 <h3>Exercise lists</h3>
                 <p>Here are the list of exercises you've been created.</p>
             </div>

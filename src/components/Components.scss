@@ -143,7 +143,10 @@ ul {
     justify-content: space-between;
     flex-direction: column;
     .heading {
-        margin-bottom: 1.2em;
+        margin-bottom: 0;
+        &.heading-extra {
+            margin-bottom: 1.2em;
+        }
     }
     h3 {
         margin-bottom: .1em;
