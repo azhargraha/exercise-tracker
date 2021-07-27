@@ -5,16 +5,6 @@ import gsap from 'gsap';
 import './Components.scss';
 
 const Navbar = () => {
-    const fadeInUp = {
-        y: 10,
-        opacity: 0,
-        ease: 'Power3.easeOut',
-        delay: .3,
-        stagger: {
-            amount: .3
-        }
-    }
-
     const [active, setActive] = useState(null);
     let navbarBg = useRef();
     let navbarBgSc = useRef();
@@ -23,6 +13,15 @@ const Navbar = () => {
 
     
     useEffect(() => {
+        const fadeInUp = {
+            y: 10,
+            opacity: 0,
+            ease: 'Power3.easeOut',
+            delay: .3,
+            stagger: {
+                amount: .3
+            }
+        }
         const activeMenu = sessionStorage.getItem('activeMenu');
         setActive(JSON.parse(activeMenu));
         gsap.from(logo.current.childNodes, {

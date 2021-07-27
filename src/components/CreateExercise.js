@@ -17,17 +17,18 @@ const CreateExercise = () => {
         date: new Date()
     };
     const [logData, setLogData] = useState(initialLog);
-    const fadeInUp = {
-        y: 10,
-        opacity: 0,
-        ease: 'Power3.easeOut',
-        delay: .3,
-        stagger: {
-            each: .2
-        }
-    }
 
     useEffect(() => {
+        const fadeInUp = {
+            y: 10,
+            opacity: 0,
+            ease: 'Power3.easeOut',
+            delay: .3,
+            stagger: {
+                each: .2
+            }
+        }
+
         axios.get('http://localhost:5000/users/')
         .then(res => setUsers(res.data))
 
@@ -37,15 +38,6 @@ const CreateExercise = () => {
             delay: .7
         });
     }, []);
-
-    const titleCase = (text) => {
-        return text.replace(
-            /\w\S*/g,
-            function(str) {
-                return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
-            }
-        );
-    }
 
     const onSubmit = (e) => {
         console.log(initialLog === logData)
@@ -111,7 +103,6 @@ const CreateExercise = () => {
                     <div className="forms" id="date">
                         <h4>Date</h4>
                         <DatePicker
-                        onChange={onChangeDate}
                         onChangeRaw={e => e.preventDefault()}
                         className="DatePicker" 
                         selected={logData.date}

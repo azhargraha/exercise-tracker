@@ -10,31 +10,35 @@ const ExercisesList = () => {
     const [dataExist, setdataExist] = useState(false);
     const heading = useRef();
     const lists = useRef();
-    const fadeInUp = {
-        y: 10,
-        opacity: 0,
-        ease: 'Power3.easeOut',
-        delay: .5,
-        stagger: {
-            amount: .1
-        }
-    }
 
     useEffect(() => {
+        const fadeInUp = {
+            y: 10,
+            opacity: 0,
+            ease: 'Power3.easeOut',
+            delay: .5,
+            stagger: {
+                amount: .1
+            }
+        }
+
         gsap.from(heading.current.childNodes, fadeInUp);
     }, []);
 
     useEffect(() => {
+        const fadeInUp = {
+            y: '2em',
+            opacity: 0,
+            ease: 'Power3.easeOut',
+            delay: .5,
+            duration: .85,
+            stagger: {
+                each: .08
+            }
+        }
+
         if (dataExist) {
-            gsap.from(lists.current.childNodes, {
-                ...fadeInUp,
-                y: '2em',
-                duration: .85,
-                ease: 'Power3.easeOut',
-                stagger: {
-                    each: .08
-                }
-            })
+            gsap.from(lists.current.childNodes, fadeInUp)
         }
     }, [dataExist]);
 

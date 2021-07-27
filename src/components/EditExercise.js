@@ -19,17 +19,18 @@ const EditExercise = (props) => {
         duration: '',
         date: new Date()
     });
-    const fadeInUp = {
-        y: 10,
-        opacity: 0,
-        ease: 'Power3.easeOut',
-        delay: .3,
-        stagger: {
-            each: .2
-        }
-    }
 
     useEffect(() => {
+        const fadeInUp = {
+            y: 10,
+            opacity: 0,
+            ease: 'Power3.easeOut',
+            delay: .3,
+            stagger: {
+                each: .2
+            }
+        }
+        
         gsap.from(heading.current.childNodes, fadeInUp);
         gsap.from(forms.current.childNodes, {
             ...fadeInUp,
